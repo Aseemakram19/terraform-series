@@ -1,0 +1,21 @@
+provider "aws"{
+    region="ap-south-1"
+    access_key="AKIASOGXGXHRMBZVTT5Q"
+    secret_key="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"
+
+}
+
+resource "aws_vpc" "my_vpc_02"{
+    cidr_block="10.20.0.0/16"
+    tags={
+        Name="my_vpc_02"
+    }
+} 
+resource "aws_subnet" "product" {
+  vpc_id     = aws_vpc.my_vpc_02.id
+  cidr_block = "10.20.1.0/24"
+  tags = {
+    Name = "product"
+    }
+}
+    

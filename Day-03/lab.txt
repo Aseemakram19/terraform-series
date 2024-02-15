@@ -1,0 +1,109 @@
+
+1.what is profile in terraform & how to configure using aws 
+2.explain argument & attribute in terraform
+3.explain meta argument in terraform - count 
+
+explain argument using to creating a ec2 instance
+
+When working with Terraform and AWS, you usually configure AWS credentials using the AWS CLI 
+or environment variables. Terraform itself doesn't have a specific "profile" concept, but it does support 
+using AWS credentials that are configured through the AWS CLI or environment variables.
+
+To configure AWS credentials in Terraform, you can set the AWS_ACCESS_KEY_ID and 
+AWS_SECRET_ACCESS_KEY environment variables or use the AWS CLI to configure a named profile.
+
+hcl
+
+provider "aws" {
+  region                  = "us-east-1"
+  profile                 = "my-aws-profile"  # Specify the named profile here
+}
+
+In the example above, the provider "aws" block is used to configure the AWS provider in Terraform. 
+The profile argument is used to specify the AWS CLI named profile to use.
+
+Now, let's talk about arguments and attributes in Terraform:
+
+Argument: In Terraform, an argument is a parameter that you pass to a resource or module.
+ For example, when creating an EC2 instance, you might pass arguments like the instance type, AMI ID, 
+ and other configuration parameters.
+hcl
+
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  key_name      = "my-key-pair"
+  # Other arguments...
+}
+
+Attribute: An attribute, on the other hand, is a value that you can retrieve from a resource 
+after it has been created. For example, after creating an EC2 instance, 
+you might want to retrieve its public IP address as an attribute.
+hcl
+
+output "instance_ip" {
+  value = aws_instance.example.public_ip
+}
+
+Now, let's discuss the count meta-argument in Terraform. The count meta-argument is used to 
+create multiple instances of a resource. It allows you to define a resource block and specify the number
+ of instances you want to create.
+
+hcl
+
+resource "aws_instance" "example" {
+  count         = 3
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  key_name      = "my-key-pair"
+  # Other arguments...
+}
+
+4In the example above, it creates three EC2 instances based on the specified configuration.
+
+To create an EC2 instance using arguments, you need to define a resource block for the aws_instance and provide the necessary arguments like ami, instance_type, key_name, etc., as shown in the previous examples. Adjust these parameters based on your specific requirements.
+
+
+
+Name = "Server ${count.index}"
+
+
+
+Terraform Profile, arguments , arttibutes & comments
+  
+  path where your .aws directory with credentials exists.
+  C:\Users\pc
+  
+  
+
+
+ 1. Argument: left side are always argument -  their resource fixed specific resource
+ 
+ec2 
+  ami :
+  instance type :
+  
+  
+  tags
+  
+  vpc_id
+  
+  
+ 2. arrtibutes:
+				characterstic of a resources. 
+				
+				expose by a perticular resource
+				
+				
+ left : argument  & right side is arrtibutes
+
+  
+  
+  
+ 3. meta_argument 
+ 
+ 
+ 
+  
+  https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-outputs
+  

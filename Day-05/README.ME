@@ -1,0 +1,64 @@
+
+In Terraform, a variable is a symbolic name for a value that can be used throughout your configuration files. 
+Variables allow you to parameterize your Terraform configurations, making them more flexible and reusable. 
+You can use variables to represent values that may vary across different environments, deployments, or scenarios.
+
+argument & attribute in terraform
+meta argument in terraform - count 
+
+
+Terraform variables can be defined in various ways:
+
+1.Variables Block:
+You can define variables in a variables block within your Terraform configuration file (typically with a .tf extension). For example:
+
+variable "region" {
+  type    = string
+  default = "us-west-2"
+}
+
+2.Variable Assignments:
+You can set values for variables when you apply or plan your Terraform configuration using -var command-line flags or by providing a .tfvars file. For example:
+
+
+region = "us-east-1"
+
+3.Environment Variables:
+Terraform also supports reading variables from environment variables. For example, you can set the TF_VAR_region environment variable to set the value for the region variable.
+
+Once defined, you can reference variables throughout your Terraform configuration. For example:
+
+
+provider "aws" {
+  region = var.region
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  region        = var.region
+}
+
+
+
+
+1. Terraform varaible
+     terrafrom apply -var="cidr_block=10.10.0.0/16"
+
+
+is case is to use on run time modifications 
+
+a. scenario cases  
+creation of Terraform.tfvars 
+
+
+b. create file with aseem.tfvars
+    terraform apply -vars-file=aseem.tfvars
+      cdir_block = "10.20.0.0/16"
+it will replace the existing cidr block argument
+   
+2. DB creation 
+   resource "aws_db_instance" "db"{
+
+   }
+

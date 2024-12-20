@@ -78,7 +78,7 @@ resource "aws_security_group" "Project-sg10" {
 }
 
 resource "aws_instance" "newproject" {
-    ami                    = "ami-03f4878755434977f"   # change ami id for different region
+    ami                    = "ami-053b12d3152c0cc71"   # change ami id for different region
     instance_type          = "t2.medium"
     key_name               = "test1245"
     subnet_id              = aws_subnet.product1.id
